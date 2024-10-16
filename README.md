@@ -21,7 +21,7 @@ $ brew install foomo/tap/ownbrew
 Add a `ownbrew.yaml` configuration
 
 ```yaml
-# yaml-language-server: $schema=https://raw.githubusercontent.com/foomo/ownbrew/v0.1.0/ownbrew.yaml
+# yaml-language-server: $schema=https://raw.githubusercontent.com/foomo/ownbrew/v0.1.0/ownbrew.schema.json
 version: '1.0'
 
 binDir: "bin"
