@@ -1,0 +1,40 @@
+version: 2
+
+builds:
+  - binary: ownbrew
+    main: ./main.go
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - windows
+      - darwin
+      - linux
+    goarch:
+      - amd64
+      - arm64
+    goarm:
+      - '7'
+    flags:
+      - -trimpath
+    ldflags:
+      - -s -w -X github.com/foomo/ownbrew/cmd.version={{.Version}}
+
+release:
+  prerelease: auto
+
+archives:
+  - format: tar.gz
+    format_overrides:
+      - goos: windows
+        format: zip
+
+changelog:
+  use: github-native
+
+brews:
+  - repository:
+      owner: foomo
+      name: homebrew-tap
+    caveats: "ownbrew --help"
+    homepage: "https://github.com/foomo/ownbrew"
+    description: "Your local project package manager"

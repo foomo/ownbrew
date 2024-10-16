@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/foomo/ownbrew/pkg/config/config",
+  "$ref": "#/$defs/Config",
+  "$defs": {
+    "Config": {
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Config version"
+        },
+        "binDir": {
+          "type": "string",
+          "description": "Path to the executable symlinks"
+        },
+        "tapDir": {
+          "type": "string",
+          "description": "Path to your project taps"
+        },
+        "tempDir": {
+          "type": "string",
+          "description": "Path for the downloaded sources"
+        },
+        "cellarDir": {
+          "type": "string",
+          "description": "Path to the versioned executables"
+        },
+        "packages": {
+          "items": {
+            "$ref": "#/$defs/Package"
+          },
+          "type": "array",
+          "description": "List of packages that should be installed"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "version",
+        "binDir",
+        "tapDir",
+        "tempDir",
+        "cellarDir"
+      ],
+      "description": "Ownbrew configuration"
+    },
+    "Package": {
+      "properties": {
+        "tap": {
+          "type": "string",
+          "description": "Name of the tap"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the package"
+        },
+        "names": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "Names of the packages"
+        },
+        "args": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "Additional command args"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the package to install"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "tap",
+        "version"
+      ]
+    }
+  }
+}
