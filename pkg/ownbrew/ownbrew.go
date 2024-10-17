@@ -221,9 +221,12 @@ func (o *Ownbrew) cellarFilename(name, version string) (string, error) {
 	)
 
 	info, err := os.Stat(ret)
-	if err != nil && !errors.Is(err, os.ErrNotExist) {
+	if errors.Is(err, os.ErrNotExist) {
+		return ret, nil
+	} else if err != nil {
 		return "", errors.Wrap(err, "failed to retrieve file info")
 	}
+
 	if info.IsDir() {
 		ret = path.Join(ret, name)
 	}
