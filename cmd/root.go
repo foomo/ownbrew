@@ -27,7 +27,7 @@ func NewRoot() *cobra.Command {
 	cmd.PersistentFlags().BoolP("verbose", "v", false, "output debug information")
 	_ = viper.BindPFlag("verbose", cmd.PersistentFlags().Lookup("verbose"))
 
-	cmd.PersistentFlags().StringP("config", "c", "ownbrew.yaml", "config file (default is ownbrew.yaml)")
+	cmd.PersistentFlags().StringP("config", "c", ".ownbrew.yaml", "config file (default is .ownbrew.yaml)")
 	_ = viper.BindPFlag("config", cmd.PersistentFlags().Lookup("config"))
 	return cmd
 }
