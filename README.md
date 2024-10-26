@@ -82,4 +82,4 @@ Make a pull request...
 Distributed under MIT License, please see license file within the code for more details.
 
 ---
-♥️ [foomo](https://www.foomo.org) by [bestbytes](https://www.bestbytes.com)
+♥ [foomo](https://www.foomo.org) by [bestbytes](https://www.bestbytes.com)
