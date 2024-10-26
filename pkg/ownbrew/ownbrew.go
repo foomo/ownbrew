@@ -12,6 +12,7 @@ import (
 	"path"
 	"path/filepath"
 	"runtime"
+	"slices"
 	"strings"
 	"time"
 
@@ -120,11 +121,34 @@ func New(l *slog.Logger, opts ...Option) (*Ownbrew, error) {
 // ~ Public methods
 // ------------------------------------------------------------------------------------------------
 
-func (o *Ownbrew) Install(ctx context.Context) error {
+func (o *Ownbrew) Install(ctx context.Context, tags ...string) error {
 	o.l.Debug("install:", "os", runtime.GOOS, "arch", runtime.GOARCH)
 
 	for _, pkg := range o.packages {
 		var install bool
+
+		if len(tags) > 0 {
+			if len(pkg.Tags) == 0 {
+				continue
+			}
+			var include bool
+			for _, tag := range tags {
+				if !strings.HasPrefix(tag, "-") && slices.Contains(pkg.Tags, tag) {
+					include = true
+					break
+				}
+			}
+			for _, tag := range tags {
+				if strings.HasPrefix(tag, "-") && slices.Contains(pkg.Tags, strings.TrimPrefix(tag, "-")) {
+					include = false
+					break
+				}
+			}
+			if !include {
+				continue
+			}
+		}
+
 		cellarFilenames, err := o.cellarFilenames(pkg)
 		if err != nil {
 			return errors.Wrap(err, "failed to retrieve cellar filename for package")
@@ -249,7 +273,7 @@ func (o *Ownbrew) installLocal(ctx context.Context, pkg config.Package) error {
 		if err != nil {
 			return errors.Wrap(err, "failed to read file")
 		}
-		util.Code(o.l, filename, string(value), "sh")
+		fmt.Println(util.Highlight(string(value), "sh"))
 		return nil
 	}
 
@@ -304,7 +328,7 @@ func (o *Ownbrew) installRemote(ctx context.Context, pkg config.Package) error {
 	}
 
 	if o.dry {
-		util.Code(o.l, url, string(script), "sh")
+		fmt.Println(util.Highlight(string(script), "sh"))
 		return nil
 	}
 
@@ -326,7 +350,7 @@ func (o *Ownbrew) installRemote(ctx context.Context, pkg config.Package) error {
 		cmd.Stderr = os.Stderr
 	}
 	if err := cmd.Run(); err != nil {
-		util.Code(o.l, url, string(script), "sh")
+		fmt.Println(util.Highlight(string(script), "sh"))
 		return errors.Wrap(err, "failed to install")
 	}
 

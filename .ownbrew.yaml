@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=ownbrew.schema.json
-version: '1.0'
+version: '1.1'
 
 binDir: "bin"
 tapDir: ".ownbrew/tap"
@@ -8,6 +8,7 @@ cellarDir: ".ownbrew/bin"
 packages:
   ## https://github.com/golangci/golangci-lint/releases
   - name: golangci-lint
+    tags: [ci]
     tap: foomo/tap/golangci/golangci-lint
     version: 1.61.0
   ## https://github.com/go-courier/husky/releases

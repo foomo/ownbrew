@@ -12,9 +12,10 @@ var root *cobra.Command
 
 func init() {
 	root = NewRoot()
-	NewVersion(root)
-	NewInstall(root)
 	NewConfig(root)
+	NewInit(root)
+	NewInstall(root)
+	NewVersion(root)
 	cobra.OnInitialize(pkgcmd.InitConfig)
 }
 

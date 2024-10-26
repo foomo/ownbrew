@@ -29,6 +29,11 @@ func NewInstall(root *cobra.Command) *cobra.Command {
 				return err
 			}
 
+			tags, err := cmd.Flags().GetStringSlice("tags")
+			if err != nil {
+				return err
+			}
+
 			brew, err := ownbrew.New(l,
 				ownbrew.WithDry(dry),
 				ownbrew.WithBinDir(cfg.BinDir),
@@ -40,11 +45,12 @@ func NewInstall(root *cobra.Command) *cobra.Command {
 			if err != nil {
 				return err
 			}
-			return brew.Install(cmd.Context())
+			return brew.Install(cmd.Context(), tags...)
 		},
 	}
 
-	cmd.Flags().Bool("dry", false, "dry run")
+	cmd.Flags().Bool("dry", false, "print out the taps that will be installed")
+	cmd.Flags().StringSlice("tags", nil, "filter by tags (e.g. ci,-test")
 
 	root.AddCommand(cmd)
 
