@@ -11,13 +11,13 @@ import (
 	"github.com/pterm/pterm"
 )
 
-func Highlight(source string) string {
+func Highlight(source, lexer string) string {
 	out := &numberWriter{
 		w:           bytes.NewBufferString(""),
 		currentLine: 1,
 	}
 	// Determine lexer.
-	l := lexers.Get("yaml")
+	l := lexers.Get(lexer)
 	if l == nil {
 		l = lexers.Analyse(source)
 	}

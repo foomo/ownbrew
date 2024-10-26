@@ -36,11 +36,7 @@
       "additionalProperties": false,
       "type": "object",
       "required": [
-        "version",
-        "binDir",
-        "tapDir",
-        "tempDir",
-        "cellarDir"
+        "version"
       ],
       "description": "Ownbrew configuration"
     },
@@ -71,13 +67,21 @@
         "version": {
           "type": "string",
           "description": "Version of the package to install"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "List of tags"
         }
       },
       "additionalProperties": false,
       "type": "object",
       "required": [
         "tap",
-        "version"
+        "version",
+        "tags"
       ]
     }
   }
