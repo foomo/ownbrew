@@ -1,9 +1,13 @@
-# Ownbrew
-
 [![Build Status](https://github.com/foomo/ownbrew/actions/workflows/test.yml/badge.svg?branch=main&event=push)](https://github.com/foomo/ownbrew/actions/workflows/test.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/foomo/ownbrew)](https://goreportcard.com/report/github.com/foomo/ownbrew)
 [![godoc](https://godoc.org/github.com/foomo/ownbrew?status.svg)](https://godoc.org/github.com/foomo/ownbrew)
 [![goreleaser](https://github.com/foomo/ownbrew/actions/workflows/release.yml/badge.svg)](https://github.com/foomo/ownbrew/actions)
+
+<p align="center">
+  <img alt="ownbrew" src=".github/assets/ownbrew.png"/>
+</p>
+
+# Ownbrew
 
 > Your local project package manager
 
@@ -76,3 +80,5 @@ Make a pull request...
 ## License
 
 Distributed under MIT License, please see license file within the code for more details.
+
+[foomo](https://www.foomo.org) by [bestbytes](https://www.bestbytes.com)
