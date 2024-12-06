@@ -32,7 +32,7 @@ packages:
 `
 
 // NewInit represents the init command
-func NewInit(root *cobra.Command) *cobra.Command {
+func NewInit(root *cobra.Command) {
 	cmd := &cobra.Command{
 		Use:   "init",
 		Short: "Init ownbrew",
@@ -54,6 +54,4 @@ func NewInit(root *cobra.Command) *cobra.Command {
 	}
 
 	root.AddCommand(cmd)
-
-	return cmd
 }
