@@ -8,7 +8,7 @@ import (
 )
 
 // NewInstall represents the install command
-func NewInstall(root *cobra.Command) *cobra.Command {
+func NewInstall(root *cobra.Command) {
 	cmd := &cobra.Command{
 		Use:   "install",
 		Short: "Install dependencies",
@@ -50,9 +50,7 @@ func NewInstall(root *cobra.Command) *cobra.Command {
 	}
 
 	cmd.Flags().Bool("dry", false, "print out the taps that will be installed")
-	cmd.Flags().StringSlice("tags", nil, "filter by tags (e.g. ci,-test")
+	cmd.Flags().StringSlice("tags", nil, "filter by tags (e.g. ci,-test)")
 
 	root.AddCommand(cmd)
-
-	return cmd
 }

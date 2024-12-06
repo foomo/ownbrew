@@ -25,7 +25,7 @@ func InitConfig() {
 		viper.SetConfigFile(filename)
 		return
 	}
-	// Search config in home directory with name ".sesamy" (without extension).
+	// Search config in home directory with name ".ownbrew" (without extension).
 	viper.AddConfigPath(".")
 	viper.SetConfigName("ownbrew")
 }

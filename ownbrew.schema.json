@@ -80,8 +80,7 @@
       "type": "object",
       "required": [
         "tap",
-        "version",
-        "tags"
+        "version"
       ]
     }
   }

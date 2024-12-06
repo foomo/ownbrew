@@ -17,7 +17,7 @@ type Package struct {
 	// Version of the package to install
 	Version string `json:"version" yaml:"version"`
 	// List of tags
-	Tags []string `json:"tags" yaml:"tags"`
+	Tags []string `json:"tags,omitempty" yaml:"tags,omitempty"`
 }
 
 func (c Package) AllNames() []string {
