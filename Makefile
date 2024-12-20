@@ -24,7 +24,7 @@ export PATH := bin:$(PATH)
 
 .PHONY: brew
 ## Install project binaries
-brew:
+brew: install
 	@ownbrew install
 
 .PHONY: doc

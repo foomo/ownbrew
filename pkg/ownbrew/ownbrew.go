@@ -204,11 +204,10 @@ func (o *Ownbrew) symlink(source, target string) error {
 		return err
 	}
 
-	prefix, err := filepath.Rel(filepath.Base(target), "")
-	if err != nil {
-		return err
+	var prefix string
+	if value, err := filepath.Rel(filepath.Base(target), source); err == nil {
+		prefix = strings.TrimSuffix(value, ".")
 	}
-	prefix = strings.TrimSuffix(prefix, ".")
 
 	o.l.Debug("symlink:", prefix+source, target)
 	return os.Symlink(prefix+source, target)
