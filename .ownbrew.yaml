@@ -3,8 +3,10 @@ version: '1.1'
 
 binDir: "bin"
 tapDir: ".ownbrew/tap"
-tempDir: ".ownbrew/tmp"
-cellarDir: ".ownbrew/bin"
+#tempDir: ".ownbrew/tmp"
+#cellarDir: ".ownbrew/bin"
+tempDir: '/Users/franklin/.local/share/ownbrew/tmp'
+cellarDir: '/Users/franklin/.local/share/ownbrew/bin'
 packages:
   ## https://github.com/golangci/golangci-lint/releases
   - name: golangci-lint
