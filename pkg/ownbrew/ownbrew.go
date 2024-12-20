@@ -204,13 +204,28 @@ func (o *Ownbrew) symlink(source, target string) error {
 		return err
 	}
 
-	var prefix string
-	if value, err := filepath.Rel(filepath.Base(target), source); err == nil {
-		prefix = strings.TrimSuffix(value, ".")
+	cwd, err := os.Getwd()
+	if err != nil {
+		return err
 	}
 
-	o.l.Debug("symlink:", prefix+source, target)
-	return os.Symlink(prefix+source, target)
+	source = os.ExpandEnv(source)
+	if !strings.HasPrefix(source, "/") {
+		source = filepath.Clean(filepath.Join(cwd, source))
+	}
+
+	target = os.ExpandEnv(target)
+	if !strings.HasPrefix(target, "/") {
+		target = filepath.Clean(filepath.Join(cwd, target))
+	}
+
+	relPath, err := filepath.Rel(filepath.Dir(target), source)
+	if err != nil {
+		return err
+	}
+
+	o.l.Debug("symlink:", target, relPath)
+	return os.Symlink(relPath, target)
 }
 
 func (o *Ownbrew) cellarExists(filename string) (bool, error) {
