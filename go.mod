@@ -5,7 +5,7 @@ go 1.23.2
 require (
 	github.com/alecthomas/chroma v0.10.0
 	github.com/foomo/go v0.0.3
-	github.com/invopop/jsonschema v0.12.0
+	github.com/invopop/jsonschema v0.13.0
 	github.com/mitchellh/mapstructure v1.5.0
 	github.com/pkg/errors v0.9.1
 	github.com/pterm/pterm v0.12.80
