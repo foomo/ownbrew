@@ -24,8 +24,8 @@ check: tidy generate lint.fix test.race audit
 
 .PHONY: brew
 ## Install project binaries
-brew: install
-	@ownbrew install
+brew: build
+	@bin/ownbrew install
 
 .PHONY: lint
 ## Run linter
@@ -62,15 +62,17 @@ test.race:
 build:
 	@echo "〉go build bin/ownbrew"
 	@mkdir -p bin
-	@go build -o bin/ownbrew main.go
+	@go build -o ./bin/ownbrew main.go
 
 .PHONY: install
 ## Install binary
+install: GOTPATH=$(shell go env GOPATH)
 install:
 	@go build -o ${GOPATH}/bin/ownbrew main.go
 
 .PHONY: install.debug
 ## Install debug binary
+install.debug: GOTPATH=$(shell go env GOPATH)
 install.debug:
 	@go build -gcflags "all=-N -l" -o ${GOPATH}/bin/ownbrew main.go
 
