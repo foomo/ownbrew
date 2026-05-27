@@ -25,6 +25,7 @@ func (c Package) AllNames() []string {
 	if len(names) == 0 {
 		names = append(names, c.Name)
 	}
+
 	return names
 }
 
@@ -38,6 +39,7 @@ func (c Package) URL() (string, error) {
 	if len(parts) < 4 {
 		return "", fmt.Errorf("invalid tap format: %s", c.Tap)
 	}
+
 	return fmt.Sprintf(
 		"https://raw.githubusercontent.com/%s/ownbrew-%s/main/%s/%s.sh",
 		parts[0],

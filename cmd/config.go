@@ -27,6 +27,7 @@ func NewConfig(root *cobra.Command) {
 			}
 
 			fmt.Println(util.Highlight(string(out), "yaml"))
+
 			return nil
 		},
 	}
