@@ -3,17 +3,15 @@ version: '1.1'
 
 binDir: "bin"
 tapDir: ".ownbrew/tap"
-#tempDir: ".ownbrew/tmp"
-#cellarDir: ".ownbrew/bin"
-tempDir: '/Users/franklin/.local/share/ownbrew/tmp'
-cellarDir: '/Users/franklin/.local/share/ownbrew/bin'
+tempDir: ".ownbrew/tmp"
+cellarDir: ".ownbrew/bin"
 packages:
   ## https://github.com/golangci/golangci-lint/releases
   - name: golangci-lint
     tags: [ci]
     tap: foomo/tap/golangci/golangci-lint
-    version: 1.61.0
-  ## https://github.com/go-courier/husky/releases
-  - name: husky
-    tap: foomo/tap/go-courier/husky
-    version: 1.8.1
+    version: 2.12.2
+  ## https://github.com/evilmartians/lefthook/releases
+  - name: lefthook
+    tap: foomo/tap/evilmartians/lefthook
+    version: 2.1.8

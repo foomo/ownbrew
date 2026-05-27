@@ -45,6 +45,7 @@ func NewInstall(root *cobra.Command) {
 			if err != nil {
 				return err
 			}
+
 			return brew.Install(cmd.Context(), tags...)
 		},
 	}

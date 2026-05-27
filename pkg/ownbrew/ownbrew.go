@@ -101,6 +101,7 @@ func New(l *slog.Logger, opts ...Option) (*Ownbrew, error) {
 		cellarDir: ".ownbrew/bin",
 		timeout:   3 * time.Minute,
 	}
+
 	for _, opt := range opts {
 		if opt != nil {
 			if err := opt(inst); err != nil {
@@ -114,6 +115,7 @@ func New(l *slog.Logger, opts ...Option) (*Ownbrew, error) {
 			return nil, err
 		}
 	}
+
 	return inst, nil
 }
 
@@ -131,19 +133,23 @@ func (o *Ownbrew) Install(ctx context.Context, tags ...string) error {
 			if len(pkg.Tags) == 0 {
 				continue
 			}
+
 			var include bool
+
 			for _, tag := range tags {
 				if !strings.HasPrefix(tag, "-") && slices.Contains(pkg.Tags, tag) {
 					include = true
 					break
 				}
 			}
+
 			for _, tag := range tags {
 				if strings.HasPrefix(tag, "-") && slices.Contains(pkg.Tags, strings.TrimPrefix(tag, "-")) {
 					include = false
 					break
 				}
 			}
+
 			if !include {
 				continue
 			}
@@ -153,6 +159,7 @@ func (o *Ownbrew) Install(ctx context.Context, tags ...string) error {
 		if err != nil {
 			return errors.Wrap(err, "failed to retrieve cellar filename for package")
 		}
+
 		for _, cellarFilename := range cellarFilenames {
 			if cellarExists, err := o.cellarExists(cellarFilename); err != nil {
 				return errors.Wrapf(err, "failed to check cellar: %s", cellarFilename)
@@ -180,17 +187,21 @@ func (o *Ownbrew) Install(ctx context.Context, tags ...string) error {
 		if !o.dry {
 			for _, name := range pkg.AllNames() {
 				filename := filepath.Join(o.binDir, name)
+
 				cellarFilename, err := o.cellarFilename(name, pkg.Version)
 				if err != nil {
 					return errors.Wrap(err, "failed to retrieve cellar filename")
 				}
+
 				o.l.Debug("creating symlink:", "source", cellarFilename, "target", filename)
+
 				if err := o.symlink(cellarFilename, filename); err != nil {
 					return errors.Wrapf(err, "failed to symlink: %s => %s", cellarFilename, filename)
 				}
 			}
 		}
 	}
+
 	return nil
 }
 
@@ -225,6 +236,7 @@ func (o *Ownbrew) symlink(source, target string) error {
 	}
 
 	o.l.Debug("symlink:", target, relPath)
+
 	return os.Symlink(relPath, target)
 }
 
@@ -236,19 +248,23 @@ func (o *Ownbrew) cellarExists(filename string) (bool, error) {
 	} else if stat.IsDir() {
 		return true, fmt.Errorf("not a file (%s)", filename)
 	}
+
 	return true, nil
 }
 
 func (o *Ownbrew) cellarFilenames(pkg config.Package) ([]string, error) {
 	names := pkg.AllNames()
+
 	ret := make([]string, len(names))
 	for i, name := range names {
 		filename, err := o.cellarFilename(name, pkg.Version)
 		if err != nil {
 			return nil, err
 		}
+
 		ret[i] = filename
 	}
+
 	return ret, nil
 }
 
@@ -287,7 +303,9 @@ func (o *Ownbrew) installLocal(ctx context.Context, pkg config.Package) error {
 		if err != nil {
 			return errors.Wrap(err, "failed to read file")
 		}
+
 		fmt.Println(util.Highlight(string(value), "sh"))
+
 		return nil
 	}
 
@@ -296,6 +314,7 @@ func (o *Ownbrew) installLocal(ctx context.Context, pkg config.Package) error {
 		runtime.GOARCH,
 		pkg.Version,
 	)
+
 	cmd.Env = append(
 		os.Environ(),
 		"BIN_DIR="+o.cellarDir,
@@ -304,6 +323,7 @@ func (o *Ownbrew) installLocal(ctx context.Context, pkg config.Package) error {
 	)
 	cmd.Args = append(cmd.Args, pkg.Args...)
 	o.l.Debug("running:", "cmd", cmd.String())
+
 	if out, err := cmd.CombinedOutput(); err != nil {
 		return errors.Wrap(err, string(out))
 	}
@@ -316,6 +336,7 @@ func (o *Ownbrew) installRemote(ctx context.Context, pkg config.Package) error {
 	if err != nil {
 		return err
 	}
+
 	o.l.Info("installing remote:", "pkg", pkg.String(), "url", url)
 
 	ctx, cancel := context.WithTimeout(ctx, o.timeout)
@@ -351,6 +372,7 @@ func (o *Ownbrew) installRemote(ctx context.Context, pkg config.Package) error {
 		runtime.GOARCH,
 		pkg.Version,
 	)
+
 	cmd.Env = append(
 		os.Environ(),
 		"BIN_DIR="+o.cellarDir,
@@ -359,10 +381,12 @@ func (o *Ownbrew) installRemote(ctx context.Context, pkg config.Package) error {
 	)
 	cmd.Args = append(cmd.Args, pkg.Args...)
 	cmd.Stdin = bytes.NewReader(script)
+
 	cmd.Stdout = os.Stdout
 	if o.l.Enabled(ctx, slog.LevelDebug) {
 		cmd.Stderr = os.Stderr
 	}
+
 	if err := cmd.Run(); err != nil {
 		fmt.Println(util.Highlight(string(script), "sh"))
 		return errors.Wrap(err, "failed to install")
@@ -379,5 +403,6 @@ func (o *Ownbrew) localTapExists(filename string) (bool, error) {
 	} else if stat.IsDir() {
 		return true, fmt.Errorf("not an executeable: %s", filename)
 	}
+
 	return true, nil
 }

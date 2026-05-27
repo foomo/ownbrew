@@ -46,6 +46,7 @@ func NewInit(root *cobra.Command) {
 			} else if err == nil {
 				l.Warn("ownbrew already initialized")
 				fmt.Println(util.Highlight(body, "yaml"))
+
 				return nil
 			}
 

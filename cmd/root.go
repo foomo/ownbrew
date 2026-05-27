@@ -30,6 +30,7 @@ func NewRoot() *cobra.Command {
 
 	cmd.PersistentFlags().StringP("config", "c", ".ownbrew.yaml", "config file (default is .ownbrew.yaml)")
 	_ = viper.BindPFlag("config", cmd.PersistentFlags().Lookup("config"))
+
 	return cmd
 }
 
@@ -37,6 +38,6 @@ func NewRoot() *cobra.Command {
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
 	if err := root.Execute(); err != nil {
-		os.Exit(1) //nolint:revive
+		os.Exit(1)
 	}
 }

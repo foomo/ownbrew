@@ -1,10 +1,11 @@
-[![Build Status](https://github.com/foomo/ownbrew/actions/workflows/test.yml/badge.svg?branch=main&event=push)](https://github.com/foomo/ownbrew/actions/workflows/test.yml)
-[![Go Report Card](https://goreportcard.com/badge/github.com/foomo/ownbrew)](https://goreportcard.com/report/github.com/foomo/ownbrew)
-[![godoc](https://godoc.org/github.com/foomo/ownbrew?status.svg)](https://godoc.org/github.com/foomo/ownbrew)
-[![goreleaser](https://github.com/foomo/ownbrew/actions/workflows/release.yml/badge.svg)](https://github.com/foomo/ownbrew/actions)
+[![Go Report Card](https://goreportcard.com/badge/github.com/foomo/ownbrew?style=flat-square)](https://goreportcard.com/report/github.com/foomo/ownbrew)
+[![GoDoc](https://img.shields.io/badge/GoDoc-✓-informational.svg?style=flat-square&logo=go)](https://godoc.org/github.com/foomo/ownbrew)
+[![GitHub Downloads](https://img.shields.io/github/downloads/foomo/ownbrew/total.svg?style=flat-square&logo=github)](https://github.com/foomo/ownbrew/releases)
+[![Docker Pulls](https://img.shields.io/docker/pulls/foomo/ownbrew.svg?style=flat-square&logo=docker)](https://hub.docker.com/r/foomo/ownbrew)
+[![GitHub Stars](https://img.shields.io/github/stars/foomo/ownbrew.svg?style=flat-square&logo=github)](https://github.com/foomo/ownbrew)
 
 <p align="center">
-  <img alt="ownbrew" src=".github/assets/ownbrew.png"/>
+  <img alt="ownbrew" src="docs/public/logo.png" height="400" width="400"/>
 </p>
 
 # Ownbrew
@@ -75,7 +76,9 @@ Use "ownbrew [command] --help" for more information about a command.
 
 ## How to Contribute
 
-Make a pull request...
+Contributions are welcome! Please read the [contributing guide](CONTRIBUTING.md).
+
+![Contributors](https://contributors-table.vercel.app/image?repo=foomo/ownbrew&width=50&columns=15)
 
 ## License
 
