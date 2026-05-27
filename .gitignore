@@ -19,9 +19,6 @@ tmp/
 ## GitHub
 !.github/
 
-## Mise
-!.mise.toml
-
 ## VSCode
 !.vscode/
 .vscode/*
@@ -48,3 +45,6 @@ go.work
 go.work.sum
 !.golangci.yaml
 !.goreleaser.yaml
+
+## Ownbrew
+!.ownbrew.yaml

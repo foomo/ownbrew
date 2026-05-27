@@ -3,23 +3,18 @@
 
 # --- Config -----------------------------------------------------------------
 
-export PATH := bin:$(PATH)
-# Newline hack for error output
-define br
-
-
-endef
+export PATH := ./bin:$(PATH)
 
 # --- Targets -----------------------------------------------------------------
 
 # This allows us to accept extra arguments
-%: .lefthook
+%: brew .lefthook
 	@:
 
 .PHONY: .lefthook
 # Configure git hooks for lefthook
 .lefthook:
-	@lefthook install --reset-hooks-path
+	@bin/lefthook install --reset-hooks-path
 
 ### Tasks
 
@@ -36,7 +31,7 @@ brew: install
 ## Run linter
 lint:
 	@echo "〉golangci-lint run"
-	golangci-lint run --max-same-issues 0 --max-issues-per-linter 0
+	@bin/golangci-lint run --max-same-issues 0 --max-issues-per-linter 0
 
 .PHONY: lint.fix
 ## Fix lint violations
