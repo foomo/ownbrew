@@ -17,8 +17,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: jdx/mise-action@v3
-
       - uses: actions/setup-go@v6
         with:
           check-latest: true
