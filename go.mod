@@ -4,7 +4,7 @@ go 1.26.3
 
 require (
 	github.com/alecthomas/chroma v0.10.0
-	github.com/foomo/go v0.11.0
+	github.com/foomo/go v0.12.0
 	github.com/go-viper/mapstructure/v2 v2.5.0
 	github.com/invopop/jsonschema v0.14.0
 	github.com/pkg/errors v0.9.1
